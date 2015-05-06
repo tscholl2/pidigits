@@ -2,7 +2,9 @@
 
 package digits
 
-import "math"
+import (
+	"math"
+)
 
 const (
 	ntp = 25
@@ -22,13 +24,13 @@ func init() {
 
 //  This returns, in chx, the first nhx hex digits of the fraction of x.
 func ihex(x float64, nhx int) *[]rune {
+	chx := make([]rune, nhx)
 
 	y := math.Abs(x)
-	chx := make([]rune, nhx)
 
 	for i := 0; i < nhx; i++ {
 		y = 16 * (y - math.Floor(y))
-		chx[i] = hx[int(y)]
+		chx[i] = hx[int(math.Floor(y))]
 	}
 
 	return &chx
