@@ -22,6 +22,20 @@ func init() {
 	}
 }
 
+// Get returns `length` hex digits of π
+// starting at position `start`
+// Get(0,3) returns the first 3 hex digits of pi
+// that is, it takes 0.14159... and turns it into hex
+func Get(start int, length int) *[]rune {
+	s1 := series(1, start)
+	s2 := series(4, start)
+	s3 := series(5, start)
+	s4 := series(6, start)
+	pid := 4*s1 - 2*s2 - s3 - s4
+	pid = pid - math.Floor(pid)
+	return ihex(pid, length)
+}
+
 //  This returns, in chx, the first nhx hex digits of the fraction of x.
 func ihex(x float64, nhx int) *[]rune {
 	chx := make([]rune, nhx)
