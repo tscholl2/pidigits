@@ -16,6 +16,7 @@ func TestGet(t *testing.T) {
 	check(t, "243F6A8885", string(*Get(0, 10)))
 	check(t, "43F6A8885A", string(*Get(1, 10)))
 	check(t, "013", string(*Get(75, 3)))
+	check(t, "243F6A8885A308D313198A2E03707344A4093822299F31D0082EFA98EC4E6C89452821E638D01377BE5466CF34E90C6CC0A", string(*Get(0,99)))
 }
 
 func TestSeries(t *testing.T) {

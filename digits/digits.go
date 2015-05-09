@@ -27,16 +27,29 @@ func init() {
 // Get(0,3) returns the first 3 hex digits of pi
 // that is, it takes 0.14159... and turns it into hex
 func Get(start int, length int) *[]rune {
+	chx := make([]rune, length)
+	for pos := 0; pos < length; pos += 9 {
+		next := getNext9(start + pos)
+		for i := 0; i < int(math.Min(float64(length-pos), 9.0)); i++ {
+			chx[pos+i] = (*next)[i]
+		}
+	}
+	return &chx
+}
+
+// This returns 9 digits which seems to be how accurate
+// the arithmetic is with float64
+func getNext9(start int) *[]rune {
 	s1 := series(1, start)
 	s2 := series(4, start)
 	s3 := series(5, start)
 	s4 := series(6, start)
 	pid := 4*s1 - 2*s2 - s3 - s4
 	pid = pid - math.Floor(pid)
-	return ihex(pid, length)
+	return ihex(pid, 9)
 }
 
-//  This returns, in chx, the first nhx hex digits of the fraction of x.
+// This returns, in chx, the first nhx hex digits of the fraction of x.
 func ihex(x float64, nhx int) *[]rune {
 	chx := make([]rune, nhx)
 
