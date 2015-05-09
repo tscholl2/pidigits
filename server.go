@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"net/http"
 
-	"github.com/tscholl2/pihash/digits"
+	"./digits"
 )
 
 type requestMessage struct {
