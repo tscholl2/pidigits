@@ -3,8 +3,8 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"strconv"
 	"net/http"
+	"strconv"
 
 	"./digits"
 )
@@ -29,15 +29,15 @@ func onRequest(w http.ResponseWriter, r *http.Request) {
 	}
 	start, err := strconv.Atoi(r.FormValue("start"))
 	if err != nil {
-		w.Write([]byte(fmt.Sprintf("err:%s", err.Error())))
+		w.Write([]byte(fmt.Sprintf("{err:\"%s\"}", err.Error())))
 		return
 	}
 	length, err := strconv.Atoi(r.FormValue("length"))
 	if err != nil {
-		w.Write([]byte(fmt.Sprintf("err:%s", err.Error())))
+		w.Write([]byte(fmt.Sprintf("{err:\"%s\"}", err.Error())))
 		return
 	}
-	reqMsg := requestMessage{Start:start,Length:length}
+	reqMsg := requestMessage{Start: start, Length: length}
 	if reqMsg.Start < 0 || reqMsg.Start > 10000000 {
 		w.Write([]byte("{err:\"Invalid starting place.\"}"))
 		return
